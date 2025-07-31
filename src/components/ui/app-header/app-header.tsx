@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import styles from './app-header.module.css';
 import { TAppHeaderUIProps } from './type';
+import { Link } from 'react-router-dom';
+import cn from 'classnames';
 import {
   BurgerIcon,
   ListIcon,
@@ -12,23 +14,47 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
   <header className={styles.header}>
     <nav className={`${styles.menu} p-4`}>
       <div className={styles.menu_part_left}>
-        <>
-          <BurgerIcon type={'primary'} />
+        <Link
+          to='/'
+          className={cn(styles.link, {
+            [styles.link_active]: location.pathname === '/'
+          })}
+          data-cy='constructor-link'
+        >
+          <BurgerIcon
+            type={location.pathname === '/' ? 'primary' : 'secondary'}
+          />
           <p className='text text_type_main-default ml-2 mr-10'>Конструктор</p>
-        </>
-        <>
-          <ListIcon type={'primary'} />
+        </Link>
+        <Link
+          to='/feed'
+          className={cn(styles.link, {
+            [styles.link_active]: location.pathname === '/feed'
+          })}
+        >
+          <ListIcon
+            type={location.pathname === '/feed' ? 'primary' : 'secondary'}
+          />
           <p className='text text_type_main-default ml-2'>Лента заказов</p>
-        </>
+        </Link>
       </div>
       <div className={styles.logo}>
         <Logo className='' />
       </div>
       <div className={styles.link_position_last}>
-        <ProfileIcon type={'primary'} />
-        <p className='text text_type_main-default ml-2'>
-          {userName || 'Личный кабинет'}
-        </p>
+        <Link
+          to='/profile'
+          className={cn(styles.link, {
+            [styles.link_active]: location.pathname === '/profile'
+          })}
+        >
+          <ProfileIcon
+            type={location.pathname === '/profile' ? 'primary' : 'secondary'}
+          />
+          <p className='text text_type_main-default ml-2'>
+            {userName || 'Личный кабинет'}
+          </p>
+        </Link>
       </div>
     </nav>
   </header>

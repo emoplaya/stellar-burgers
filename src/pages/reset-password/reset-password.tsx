@@ -10,6 +10,12 @@ export const ResetPassword: FC = () => {
   const [token, setToken] = useState('');
   const [error, setError] = useState<Error | null>(null);
 
+  useEffect(() => {
+    if (!localStorage.getItem('resetPassword')) {
+      navigate('/forgot-password', { replace: true });
+    }
+  }, [navigate]);
+
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     setError(null);
@@ -20,12 +26,6 @@ export const ResetPassword: FC = () => {
       })
       .catch((err) => setError(err));
   };
-
-  useEffect(() => {
-    if (!localStorage.getItem('resetPassword')) {
-      navigate('/forgot-password', { replace: true });
-    }
-  }, [navigate]);
 
   return (
     <ResetPasswordUI
