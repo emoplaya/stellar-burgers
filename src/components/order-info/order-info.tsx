@@ -7,7 +7,11 @@ import { ingredientsSelector } from '../../../src/services/slices/ingredients/in
 import { useParams } from 'react-router-dom';
 import { getOrderByNumberApi } from '@api';
 
-export const OrderInfo: FC = () => {
+interface OrderInfoProps {
+  title?: string;
+}
+
+export const OrderInfo: FC<OrderInfoProps> = ({ title }) => {
   const { number } = useParams();
   const orderNumber = number ? parseInt(number, 10) : null;
 
@@ -72,5 +76,5 @@ export const OrderInfo: FC = () => {
     return <Preloader />;
   }
 
-  return <OrderInfoUI orderInfo={orderInfo} />;
+  return <OrderInfoUI orderInfo={orderInfo} title={title} />;
 };

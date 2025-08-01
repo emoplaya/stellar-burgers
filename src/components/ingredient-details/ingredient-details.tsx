@@ -6,7 +6,10 @@ import { useParams } from 'react-router-dom';
 import { TIngredient } from '@utils-types';
 import { ingredientsSelector } from '../../../src/services/slices/ingredients/ingredientsSlice';
 
-export const IngredientDetails: FC = () => {
+interface IngredientDetailsProps {
+  title?: string;
+}
+export const IngredientDetails: FC<IngredientDetailsProps> = ({ title }) => {
   const { id } = useParams<{ id: string }>();
 
   const ingredients = useSelector(ingredientsSelector);
@@ -19,5 +22,5 @@ export const IngredientDetails: FC = () => {
     return <Preloader />;
   }
 
-  return <IngredientDetailsUI ingredientData={ingredientData} />;
+  return <IngredientDetailsUI ingredientData={ingredientData} title={title} />;
 };
