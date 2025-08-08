@@ -11,7 +11,7 @@ import { TConstructorIngredient } from '@utils-types';
 export const IngredientsCategory = forwardRef<
   HTMLUListElement,
   TIngredientsCategoryProps
->(({ title, titleRef, ingredients }, ref) => {
+>(({ title, titleRef, ingredients, ...rest }, ref) => {
   const bun = useSelector(constructorBunSelector);
   const constructorIngredients = useSelector(constructorIngredientsSelector);
   const ingredientsCounters = useMemo(() => {
@@ -35,6 +35,7 @@ export const IngredientsCategory = forwardRef<
       ingredients={ingredients}
       ingredientsCounters={ingredientsCounters}
       ref={ref}
+      {...rest}
     />
   );
 });
