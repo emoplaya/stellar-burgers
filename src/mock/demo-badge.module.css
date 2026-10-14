@@ -1,0 +1,26 @@
+.badge {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: calc(100vw - 32px);
+  padding: 10px 16px;
+  border: 1px solid #4c4cff;
+  border-radius: 40px;
+  background: #1c1c21;
+  color: #8585ad;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.close {
+  border: none;
+  background: transparent;
+  color: #f2f2f3;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}

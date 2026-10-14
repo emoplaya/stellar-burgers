@@ -4,6 +4,10 @@ import App from './components/app/app';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './services/store';
+import { installApiFallback } from './mock/install';
+import { DemoBadge } from './mock/demo-badge';
+
+installApiFallback(process.env.BURGER_API_URL);
 
 // на GitHub Pages приложение открывается из подпапки
 const basename = (process.env.PUBLIC_PATH || '/').replace(/\/$/, '');
@@ -16,6 +20,7 @@ root.render(
     <Provider store={store}>
       <BrowserRouter basename={basename}>
         <App />
+        <DemoBadge />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>
