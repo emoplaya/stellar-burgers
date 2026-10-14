@@ -3,6 +3,9 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
+// для GitHub Pages сайт живет в подпапке /stellar-burgers/
+const PUBLIC_PATH = process.env.PUBLIC_PATH || '/';
+
 module.exports = {
   entry: path.resolve(__dirname, './src/index.tsx'),
   module: {
@@ -52,9 +55,16 @@ module.exports = {
       extensions: ['.js', '.jsx', '.ts', '.tsx']
     }),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './public/index.html',
+      favicon: './public/favicon.ico'
     }),
-    new Dotenv()
+    // копия index.html для GitHub Pages, чтобы прямые ссылки на роуты открывали SPA
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      favicon: './public/favicon.ico',
+      filename: '404.html'
+    }),
+    new Dotenv({ systemvars: true, defaults: './.env.example' })
   ],
   resolve: {
     extensions: [
@@ -83,7 +93,9 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js'
+    filename: '[name].[contenthash].js',
+    publicPath: PUBLIC_PATH,
+    clean: true
   },
   devServer: {
     static: path.join(__dirname, './dist'),

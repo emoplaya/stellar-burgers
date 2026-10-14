@@ -1,19 +1,40 @@
-# Проектная работа 11-го спринта
+# Stellar Burgers
 
-[Макет](<https://www.figma.com/file/vIywAvqfkOIRWGOkfOnReY/React-Fullstack_-Проектные-задачи-(3-месяца)_external_link?type=design&node-id=0-1&mode=design>)
+Космическая бургерная - SPA, в котором можно собрать бургер из ингредиентов, оформить заказ и посмотреть ленту заказов других пользователей.
 
-[Чеклист](https://www.notion.so/praktikum/0527c10b723d4873aa75686bad54b32e?pvs=4)
+**Демо:** https://emoplaya.github.io/stellar-burgers/
 
-## Этапы работы:
+## Возможности
 
-1. Разверните проект и ознакомьтесь с кодом. Все необходимые вам компоненты уже созданы и лежат в папке `src/components`
+- конструктор бургера - выбор булки, начинок и соусов, подсчет стоимости
+- детали ингредиента и заказа в модальных окнах с собственными URL
+- лента всех заказов и статистика выполненных
+- регистрация, вход, восстановление пароля, обновление токенов
+- личный кабинет с редактированием профиля и историей заказов
+- защищенные маршруты для авторизованных и неавторизованных пользователей
 
-2. Настройте роутинг.
+## Стек
 
-3. Напишите функционал запросов данных с сервера, используя `Redux` и глобальный `store`. Сами "ручки" уже прописаны и лежат в `utils/burger-api.ts`
+React 18, TypeScript, Redux Toolkit, React Router 6, Webpack 5, CSS Modules, Jest, Cypress, Storybook
 
-4. Настройте авторизацию и создайте защищённые роуты.
+## Тесты
 
-## Важно:
+- `npm test` - unit-тесты слайсов и стора на Jest
+- `npm run cypress:open` - e2e-тесты конструктора на Cypress
 
-Для корректной работы запросов к серверу необходимо добавить переменную BURGER_API_URL в окружение. Сама ссылка находится в файле `.env.example`.
+Unit-тесты запускаются в GitHub Actions перед каждым деплоем.
+
+## Запуск
+
+```bash
+cp .env.example .env
+npm install
+npm start        # http://localhost:4000
+npm run build    # сборка в dist
+```
+
+## Деплой
+
+При пуше в `main` GitHub Actions прогоняет тесты, собирает проект и публикует его на GitHub Pages (`.github/workflows/deploy.yml`).
+
+[Макет в Figma](<https://www.figma.com/file/vIywAvqfkOIRWGOkfOnReY/React-Fullstack_-Проектные-задачи-(3-месяца)_external_link?type=design&node-id=0-1&mode=design>)
